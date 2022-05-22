@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const NavBar = ({accounts, setAccounts}) => {
+const NavBar = ({accounts, setAccounts}) => {
 	const isConnected = Boolean(accounts[0]);
 
   async function connectAccounts() {
@@ -33,3 +33,5 @@ export const NavBar = ({accounts, setAccounts}) => {
 		</div>
 	)
 }
+
+export default NavBar;
