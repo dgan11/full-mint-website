@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { ethers, BigNumber } from 'ethers'; // connect to blockchain
 import RoboPunksNFT from '../RoboPunksNFT.json';
 
+// Address
 const RoboPunksNFTAddress = '0xbd57D65E76cA00Bf150B269180a9F5234CBe178c';
 
 const MainMint = ({ accounts, setAccounts }) => {
