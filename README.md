@@ -48,4 +48,6 @@ Steps:
 
 7. Code frontend in ./src/App.js
 
+8. Style in src/App.css
+
 
