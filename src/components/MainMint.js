@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { ethers, BigNumber } from 'ethers'; // connect to blockchain
 import RoboPunksNFT from '../RoboPunksNFT.json';
+import { Box, Button, Flex, Input, Text } from '@chakra-ui/react';
 
 // Address
 const RoboPunksNFTAddress = '0xbd57D65E76cA00Bf150B269180a9F5234CBe178c';
@@ -20,7 +21,9 @@ const MainMint = ({ accounts, setAccounts }) => {
         signer,
       );
       try {
-        const response = await contract.mint( BigNumber.from(mintAmount));
+        const response = await contract.mint( BigNumber.from(mintAmount), {
+          value: ethers.utils.parseEther((0.02 * mintAmount).toString()),
+        });
         console.log('response: ', response);
       } catch (err) {
         console.log('error: ', err);
@@ -39,22 +42,80 @@ const MainMint = ({ accounts, setAccounts }) => {
   }
 
   return (
-      <div>
-        <h1>RoboPunks</h1>
-        <p>RoboPunks are a collection 6969 droids trying to save humanity as we know it. Join us.</p>
-        {isConnected ? (
+      <Flex justify="center" align="center" height="100vh" paddingBottom="150px">
+        <Box>
           <div>
-            <div>
-              <button onClick={handleDecrement}>-</button>
-              <input type="number" value={mintAmount}/>
-              <button onClick={handleIncrement}>+</button>
-            </div>
-            <button onClick={handleMint}>Mint Now</button>
+            <Text fontSize="48px" textShadow="0 5px #000000">RoboPunks</Text>
+            <Text
+              fontSize="30px" 
+              textShadow="0 2px 2px #000000" 
+              fontFamily="VT323" 
+              letterSpacing="-5.5"
+            >
+              RoboPunks are a collection 6969 droids trying to save humanity as we know it. Join us.
+            </Text>
           </div>
-        ) : (
-          <p>Connect now to mint</p>
-        )}
-      </div>
+          
+          {isConnected ? (
+            <div>
+              <Flex justify="center" align="center">
+                <Button 
+                  backgroundColor="#D5517D"
+                  borderRadius="5px"
+                  boxShadow="0px 2px 2px 1px #0F0F0F"
+                  color="white"
+                  cursor="pointer"
+                  fontFamily="inherit"
+                  padding="15px"
+                  marginTop="10px"
+                  onClick={handleDecrement}
+                >
+                  -
+                </Button>
+                <Input
+                  readOnly
+                  fontFamily="inherit"
+                  width="100px"
+                  height="40px"
+                  textAlign="center"
+                  paddingLeft="19px"
+                  marginTop="10px"
+                  type="number" 
+                  value={mintAmount}
+                />
+                <Button 
+                  backgroundColor="#D5517D"
+                  borderRadius="5px"
+                  boxShadow="0px 2px 2px 1px #0F0F0F"
+                  color="white"
+                  cursor="pointer"
+                  fontFamily="inherit"
+                  padding="15px"
+                  marginTop="10px"
+                  onClick={handleIncrement}
+                >
+                  +
+                </Button>
+              </Flex>
+              <Button 
+                backgroundColor="#D5517D"
+                borderRadius="5px"
+                boxShadow="0px 2px 2px 1px #0F0F0F"
+                color="white"
+                cursor="pointer"
+                fontFamily="inherit"
+                padding="15px"
+                marginTop="10px"
+                onClick={handleMint}
+              >
+                Mint Now
+              </Button>
+            </div>
+          ) : (
+            <p>Connect now to mint</p>
+          )}
+        </Box>
+      </Flex>
   )
 }
 
